@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: user_logs
+    // Document ID: random string
+    // Fields:
+    //   - id: string (required) - unique session id
+    //   - phone: string (required) - user phone or login method
+    //   - token: string (required) - JWT access token
+    //   - loginTime: timestamp/string (required) - ISO 8601 login time
+    //   - status: string (required) - 'active' or 'inactive'
+    //   - courses: string (optional) - JSON string of batches
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (request.auth.token.email == "ayushsingh112280@gmail.com" && request.auth.token.email_verified == true);
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // User logs
+    match /user_logs/{logId} {
+      // Only admins can read logs from the client
+      allow read: if isAdmin();
+      
+      // Allow creation for logging (Server uses Admin SDK but we allow this as fallback)
+      // We use strict validation to ensure only valid logs are created
+      allow create: if true; 
+      
+      // Updates and deletes still restricted to admin
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+  }
+}

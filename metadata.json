@@ -1,0 +1,5 @@
+{
+  "name": "PW Course Explorer",
+  "description": "A full-stack application to explore PW courses using mobile/OTP or token login, featuring a secure admin panel.",
+  "requestFramePermissions": []
+}

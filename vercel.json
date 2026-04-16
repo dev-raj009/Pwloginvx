@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/v1/pw/get-otp", "destination": "/api/index.ts" },
+    { "source": "/api/v1/pw/verify-otp", "destination": "/api/index.ts" },
+    { "source": "/api/v1/pw/login-token", "destination": "/api/index.ts" },
+    { "source": "/api/v1/pw/batches", "destination": "/api/index.ts" },
+    { "source": "/api/v1/pw/batch-details/:batchId", "destination": "/api/index.ts" },
+    { "source": "/api/v1/pw/batch-subjects/:batchId", "destination": "/api/index.ts" },
+    { "source": "/api/v1/pw/subject-contents/:batchId/:subjectId", "destination": "/api/index.ts" },
+    { "source": "/api/v1/pw/logout", "destination": "/api/index.ts" },
+    { "source": "/api/v1/admin/login", "destination": "/api/index.ts" },
+    { "source": "/api/v1/admin/logs", "destination": "/api/index.ts" },
+    { "source": "/api/v1/admin/stats", "destination": "/api/index.ts" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

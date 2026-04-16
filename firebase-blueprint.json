@@ -1,0 +1,24 @@
+{
+  "entities": {
+    "user_log": {
+      "title": "User Log",
+      "description": "Logs of user logins and their activity",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Randomly generated ID" },
+        "phone": { "type": "string", "description": "User phone number" },
+        "token": { "type": "string", "description": "JWT Token" },
+        "loginTime": { "type": "string", "format": "date-time", "description": "Time of login" },
+        "courses": { "type": "string", "description": "JSON string of courses" },
+        "status": { "type": "string", "enum": ["active", "inactive"], "description": "Current status" }
+      },
+      "required": ["id", "token", "loginTime"]
+    }
+  },
+  "firestore": {
+    "/user_logs/{logId}": {
+      "schema": "user_log",
+      "description": "Collection of user login logs for admin"
+    }
+  }
+}
